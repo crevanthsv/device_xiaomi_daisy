@@ -16,24 +16,27 @@
 # Inherit from common msm8953-common
 -include device/xiaomi/msm8953-common/BoardConfigCommon.mk
 
-DEVICE_PATH := device/xiaomi/tissot
+DEVICE_PATH := device/xiaomi/sakura
 
 # Filesystem
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-BOARD_USES_RECOVERY_AS_BOOT := true
-TARGET_NO_RECOVERY := true
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
 
 # HIDL
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
 # Kernel
-TARGET_KERNEL_CONFIG := tissot_defconfig
+TARGET_KERNEL_CONFIG := sakura_defconfig
 
 # Partitions
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 55087422464 # 25765059584 - 16384
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 25765043200 # 25765059584 - 16384
+BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
+BOARD_VENDORIMAGE_PARTITION_SIZE := 872415232
 
 # Power
-TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
+TARGET_TAP_TO_WAKE_NODE := "/proc/tp_wakeup_gesture"
 
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
@@ -45,4 +48,4 @@ VENDOR_SECURITY_PATCH := 2019-05-05
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Inherit from the proprietary version
--include vendor/xiaomi/tissot/BoardConfigVendor.mk
+-include vendor/xiaomi/sakura/BoardConfigVendor.mk
